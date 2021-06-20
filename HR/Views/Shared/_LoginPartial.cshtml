@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Employee> SignInManager
+@inject UserManager<Employee> UserManager
+@inject HR.Data.ApplicationDbContext  context;
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark logout"><i class="fas fa-sign-out-alt"></i></button>
+            </form>
+        </li>
+
+       @* @if (User.IsInRole("Admin") || User.IsInRole("HR,Manager"))
+        {*@
+            <li class="dropdown">
+                <button class="btn notification" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class=" far fa-bell" id="tttt">
+                        <span class="badge" id="NotiNumber"></span>
+                    </i>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuButton" id="notiList">
+                    @{
+                        int count = 0;
+                        int ncount = 0;
+                    }
+                    @foreach (var item in context.Notification.Where(a => a.ToUser == UserManager.GetUserId(User)).OrderByDescending(a => a.Id))
+                    {
+                        count += 1;
+                        if (count >= 10)
+                        {
+                            break;
+                        }
+                        else if (item.IsRead == false)
+                        {
+                            ncount += 1;
+                            var x = UserManager.FindByIdAsync(item.FromUser).Result;
+                            <a class="dropdown-item" asp-action="Index" asp-controller="LeaveApplications" asp-route-id="@item.Id">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img class="img" src="~/Files/EmployeePhotos/@item.PhotoPath" />
+                                    </div>
+                                    <div class="col-9">
+                                        <span class="noti-text">
+                                            @x.Email
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                    }
+                    <input type="number" value="@ncount" id="NotiCount" hidden />
+                </div>
+            </li>
+       @* }*@
+
+        <li class="nav-item">
+            <a class="nav-link text-dark profile" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fas fa-user"></i></a>
+        </li>
+    }
+
+</ul>

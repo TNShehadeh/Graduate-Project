@@ -1,0 +1,116 @@
+﻿@model HR.Models.LeaveApplication
+@inject Microsoft.AspNetCore.Identity.UserManager<HR.Models.Employee> userManager;
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4 class="@ViewBag.Class">@ViewBag.MyMessage</h4>
+<hr />
+<div class="row">
+    <div class="col">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col">
+                    @{
+                        var x = userManager.FindByIdAsync(Model.EmployeeInfo).Result;
+                        var s = "";
+                        if (x == null)
+                        {
+                            s = "Deleted";
+                        }
+                        else
+                        {
+                            s = userManager.GetUserNameAsync(x).Result;
+                        }
+                    }
+                    <div class="form-group">
+                        <input asp-for="EmployeeInfo" class="form-control select-input" />
+                        <span asp-validation-for="EmployeeInfo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <select asp-for="LeaveTypeId" class="form-control select-input" asp-items="ViewBag.LeaveTypeId"></select>
+                        <span asp-validation-for="LeaveTypeId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="Reason" class="form-control select-input" placeholder="No Reason" />
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="LeaveCount" class="form-control select-input" />
+                        <span asp-validation-for="LeaveCount" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="Start" class="form-control select-input" />
+                        <span asp-validation-for="Start" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="End" class="form-control select-input" />
+                        <span asp-validation-for="End" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="Status" class="form-control select-input" />
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <label>
+                        <input type="radio" name="Sstatus" value="true" class="select-input" />
+                        Accepted
+                    </label>
+                    <br />
+                    <label>
+                        <input type="radio" name="Sstatus" value="false" class="select-input" />
+                        not Accepted
+                    </label>
+                </div>
+            </div>
+            @if (Model.LeaveDocumentPath != null)
+            {
+                <div class="row">
+                    <div class="col">
+                        @{
+                            var doc = "/Files/LeaveDocuments/" + Model.LeaveDocumentPath;
+                        }
+                        <a href="@doc" class="btn btn-primary" target="_blank">View The Document</a>
+                        @*                </div>
+                        <div class="col">*@
+                        <a href="@doc" class="btn btn-primary" download>Download The Document</a>
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" asp-route-id="@Model.Id" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

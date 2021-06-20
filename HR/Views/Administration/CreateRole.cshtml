@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@model HR.ViewModel.CreateRoleViewModel
+@inject IAuthorizationService authorization;
+@{
+    ViewData["Title"] = "CreateRole";
+}
+
+<div class="top container body-content">
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="RoleName" class="form-control select-input" placeholder="Role Name"/>
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="ListRoles">Back to List</a>
+    </div>
+</div>

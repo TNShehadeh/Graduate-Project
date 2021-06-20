@@ -1,0 +1,84 @@
+﻿@model HR.Models.OfficialDetails
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>OfficialDetails</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmployeeType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmployeeType.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Designation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Designation.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmlpoyeeGrade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmlpoyeeGrade.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JoinDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JoinDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PFNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PFNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Shift)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Shift.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SuperEmlpoyeeId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SuperEmlpoyeeId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Email)
+        </dd>
+        <dt class="col-sm-2">
+            Sick leaves
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sickleave)
+        </dd>
+        <dt class="col-sm-2">
+            Total Vacations
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalVacations)
+        </dd>
+        <dt class="col-sm-2">
+            Totole Houres To leave
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotoleHouresToleave)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

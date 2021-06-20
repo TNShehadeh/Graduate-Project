@@ -1,0 +1,108 @@
+﻿@model IEnumerable<HR.Models.BankInfo>
+@using Microsoft.AspNetCore.Authorization;
+@inject IAuthorizationService authorization;
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if ((await authorization.AuthorizeAsync(User, "Edit&AndOfficialDetails")).Succeeded)
+{
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+}
+@* datatable *@
+<table class="table" id="classes_table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BankName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BankName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountName)
+            </td>
+            <td>
+                @if ((await authorization.AuthorizeAsync(User, "Edit&AndOfficialDetails")).Succeeded)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.AccountNumber">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.AccountNumber">Details</a>
+                    <a class="delete-link" data-id="@item.Id">Delete</a>
+                }
+                else
+                {
+                    <a asp-action="Details" asp-route-id="@item.AccountNumber">Details</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#classes_table').DataTable({
+                responsive: true,
+                "columnDefs": [
+                    { "searchable": false, "targets": 2 }
+                ]
+            });
+        });
+    </script>
+    <script>
+        $(document).on("click", ".delete-link", function () {
+            var clicked_btn = $(this);
+            var user_id = clicked_btn.attr("data-id");
+            Swal.fire({
+                title: 'Are you sure you want to delete this?',
+                text: "You won't be able to revert this again!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/BankInfoes/Delete",
+                        data: { id: user_id }
+                    }).done(function () {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        ).then((result) => {
+                            location.reload();
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+}

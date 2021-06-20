@@ -1,0 +1,97 @@
+﻿@model IEnumerable<HR.Models.Calendered>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table" id="classes_table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserInfo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserInfo)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="delete-link" data-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#classes_table').DataTable({
+                responsive: true,
+                "columnDefs": [
+                    { "searchable": false, "targets": 6 }
+                ]
+            });
+        });
+    </script>
+    <script>
+        $(document).on("click", ".delete-link", function () {
+            var clicked_btn = $(this);
+            var user_id = clicked_btn.attr("data-id");
+            Swal.fire({
+                title: 'Are you sure you want to delete this?',
+                text: "You won't be able to revert this again!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/Calendereds/Delete",
+                        data: { id: user_id }
+                    }).done(function () {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        ).then((result) => {
+                            location.reload();
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+}

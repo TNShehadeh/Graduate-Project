@@ -1,0 +1,69 @@
+﻿@model HR.Models.Address
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<h4>Address</h4>
+<hr />
+<div class="row">
+    <div class="col">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="Country" class="form-control select-input" placeholder="Country" />
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="State" class="form-control select-input" placeholder="State" />
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="State" class="form-control select-input" placeholder="State" />
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="City" class="form-control select-input" placeholder="City" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="Street" class="form-control select-input" placeholder="Street" />
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input asp-for="PinCode" class="form-control select-input" placeholder="PinCode" />
+                        <span asp-validation-for="PinCode" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

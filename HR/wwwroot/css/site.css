@@ -1,0 +1,217 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+/*.container-new{
+    position:absolute !important;
+    left:10% !important;
+    
+}*/
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+    background-color: #E6E9F0 !important;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #E6E9F0 !important;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height:25px;
+    white-space: nowrap;
+    z-index: 2;
+    background-color: #F2F4F7 !important;
+}
+.dropdown-item {
+    display: block;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+   
+}
+.far{
+    color: black !important;
+}
+
+.notification {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+  
+}
+.noti-text {
+    font-size: 10px;
+    font-weight:bold;
+}
+
+.fa-bell:hover {
+    color: rgb(220 16 16 / 0.84) !important;
+}
+
+    .notification .badge {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        border-radius: 50%;
+        background: red;
+        color: white;
+        font-size: 10px;
+    }
+
+.dropdown-menu-custom {
+    overflow: hidden;
+    direction: ltr;
+    width: 500%;
+}
+.img{
+    width:30px!important;
+    height:100% !important;
+    border-radius:100%;
+    
+}
+@media only screen and (max-width:576px){
+    .dropdown-menu {
+        overflow: hidden;
+        direction: ltr;
+        width:100% !important;
+        
+        
+    }
+    
+        .logout {
+        position: absolute;
+        left: 18px;
+        padding:8px 8px;
+        
+    }
+    .notification {
+        position: relative;
+        left: -10px;
+        padding-top:7px;
+    }
+    .dropdown{
+        padding-top:10px;
+    }
+    .profile {
+        position:relative;
+        left:2px;
+        top:-7px;
+      
+    }
+}
+.fa-sign-out-alt:hover {
+    color: #eb8900;
+}
+.fa-user:hover{
+    color:#1a3ecc;
+}
+@media only screen and (max-width:1425px){
+    .container-new{
+        position:absolute;
+        left:190px;
+        width:1000px;
+    }
+
+
+}
+@media only screen and (max-width:1237px) {
+    .container-new {
+
+        width: 900px;
+    }
+}
+@media only screen and (max-width:1110px) {
+    .container-new {
+        width: 800px;
+        position: absolute;
+        left: 150px;
+    }
+}
+@media only screen and (max-width:900px) {
+    .container-new {
+        position: absolute;
+        left: 100px;
+        width: 700px;
+    }
+}
+@media only screen and (max-width:810px) {
+    .container-new {
+        position: absolute;
+        left: 100px;
+        width: 600px;
+    }
+}
+@media only screen and (max-width:764px) {
+    .container-new {
+        position: absolute;
+        left: 10px;
+        width: 100%;
+    }
+}
+@media only screen and (max-width:586px) {
+    .container-new {
+        position: absolute;
+        left: 10px;
+        width: 80%;
+    }
+}

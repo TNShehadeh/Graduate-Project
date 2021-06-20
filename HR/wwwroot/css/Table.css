@@ -1,0 +1,33 @@
+﻿td {
+    background-color: #E6E9F0;
+    border-color: #495C6E !important;
+    border: none !important;
+}
+.select-input {
+    background-color: #e6e9f0 !important;
+    border-style: none !important;
+    border-bottom: outset !important;
+    overflow: hidden;
+}
+#file-upload-button{
+    display: none !important;
+}
+.select-input:focus {
+    outline: none !important;
+    background-color: red;
+    -webkit-box-shadow: none;
+    outline: -webkit-focus-ring-color auto 0px;
+}
+.form-control:focus {
+    outline: none !important;
+    outline-style: none !important;
+    outline-color: transparent !important;
+}
+.btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+#userphoto{
+    width:150px;
+    height:100px;
+}

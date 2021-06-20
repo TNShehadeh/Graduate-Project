@@ -1,0 +1,45 @@
+﻿@page
+@model LoginModel
+
+@{
+    Layout = "";
+    ViewData["Title"] = "Log in";
+}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="~/css/Login.css" rel="stylesheet" />
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="~/Img/Logo/user.png" id="icon" alt="User Icon" class="mb-3 mt-2"/>
+        </div>
+
+        <!-- Login Form -->
+        <form id="account" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Input.Email" id="login" class="fadeIn second select-input form-control myInput" placeholder="Email">
+            <input asp-for="Input.Password" id="password" class="fadeIn third select-input form-control myInput" placeholder="password">
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <div class="form-group mt-4 mb-3">
+                <div class="checkbox">
+                    <label asp-for="Input.RememberMe">
+                        <input asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Log In" id="log-in">
+        </form>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+
+    </div>
+</div>

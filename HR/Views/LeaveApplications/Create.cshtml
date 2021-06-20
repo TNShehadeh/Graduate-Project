@@ -1,0 +1,90 @@
+﻿@model HR.ViewModel.LeaveViewModel;
+@inject Microsoft.AspNetCore.Identity.UserManager<HR.Models.Employee> userManager;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+@if (ViewBag.TotalVacations <= 0 && ViewBag.Sickleave <= 0 && ViewBag.TotoleHouresToleave <= 0)
+{
+    <h3 class="@ViewBag.Class">@ViewBag.MyMessage</h3>
+}
+else
+{
+        <h3 class="@ViewBag.Class">You have: @Model.LeaveCount day and @Model.HouresCount Hour </h3>
+        <h3 class="@ViewBag.Class">You have: @ViewBag.Sickleave day for Sicks Leave</h3>
+
+    <hr />
+    <div class="row">
+        <div class="col">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <select asp-for="LeaveTypeId" class="form-control select-input" asp-items="ViewBag.LeaveTypeId"></select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input asp-for="Reason" class="form-control select-input" placeholder="Reason" />
+                            <span asp-validation-for="Reason" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Start" class="control-label select-input"></label>
+                            <input asp-for="Start" class="form-control select-input" />
+                            <span asp-validation-for="Start" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="End" class="control-label select-input"></label>
+                            <input asp-for="End" class="form-control select-input" />
+                            <span asp-validation-for="End" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input asp-for="LeaveDocument" class="form-control custom-file-input select-input" accept="application/pdf,image/x-eps" />
+                                <label class="custom-file-label select-input">Choose File...</label>
+                                <span asp-validation-for="LeaveDocument" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" onclick="send()" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+        function send() {
+            con.invoke("LeaveApplications", "@ViewBag.SuperId" , "@userManager.GetUserId(User)")
+        }
+    </script>
+}

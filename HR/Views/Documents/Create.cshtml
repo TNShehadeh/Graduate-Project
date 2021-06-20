@@ -1,0 +1,61 @@
+﻿@model HR.ViewModel.DocumentsViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Documents</h4>
+<hr />
+<div class="row">
+    <div class="col">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col">
+                    <div class="col">
+                        <div class="form-group">
+                            <input asp-for="Name" class="form-control select-input" placeholder="The Document Name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <select asp-for="EmployeeId" class="form-control select-input" asp-items="ViewBag.EmployeeId"></select>
+                        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input asp-for="TheDocument" class="form-control custom-file-input select-input" accept="application/pdf,image/x-eps" />
+                            <label class="custom-file-label select-input">Choose File...</label>
+                            <span asp-validation-for="TheDocument" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+}

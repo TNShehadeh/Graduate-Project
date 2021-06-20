@@ -1,0 +1,118 @@
+﻿@using Microsoft.AspNetCore.Authorization;
+
+
+@model HR.ViewModel.AddUser
+@inject IAuthorizationService authorization;
+@{
+    ViewData["Title"] = "Add User";
+}
+@if ((await authorization.AuthorizeAsync(User, "AddUser")).Succeeded)
+{
+    <h2>
+        Add New User
+    </h2>
+    <div class="top container body-content">
+        <hr />
+        <div class="row">
+            <div class="col">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Email" class="form-control select-input" placeholder="Email"/>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="FirstName" class="form-control select-input" placeholder="First Name"/>
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="MiddleName" class="form-control select-input" placeholder="Middle Name"/>
+                                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="FatherName" class="form-control select-input" placeholder="Father Name"/>
+                                    <span asp-validation-for="FatherName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Photo" class="form-control custom-file-input select-input" accept="image/jpeg,image/gif,image/png" />
+                                    <label class="custom-file-label select-input">Choose File...</label>
+                                    <span asp-validation-for="Photo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Bday" class="form-control select-input" placeholder="Birth date"/>
+                                    <span asp-validation-for="Bday" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="Gender" class="form-control select-input" asp-items="ViewBag.Gender"></select>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="DepartmentName" class="form-control select-input" asp-items="ViewBag.DepartmentName"></select>
+                                    <span asp-validation-for="DepartmentName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="SocialStatus" class="form-control select-input" asp-items="ViewBag.SocialStatus"></select>
+                                    <span asp-validation-for="SocialStatus" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Password" class="form-control select-input" placeholder="Password"/>
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="ConfirmPassword" class="form-control select-input" placeholder="Confirm Password"/>
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default delete-link" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="UsersList" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+}

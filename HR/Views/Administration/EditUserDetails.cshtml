@@ -1,0 +1,195 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@model HR.ViewModel.EditUserDetailsViewModel
+@inject IAuthorizationService authorization;
+@{
+    ViewData["Title"] = "Add User";
+}
+@if ((await authorization.AuthorizeAsync(User, "AddUser")).Succeeded)
+{
+    <h2>
+       Edit User Info
+    </h2>
+    <div class="top container body-content">
+        <hr />
+        <div class="row">
+            <div class="col">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="FirstName" class="form-control select-input"  />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="MiddleName" class="form-control select-input"  />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="FatherName" class="form-control select-input"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="DepartmentName" class="form-control select-input" asp-items="ViewBag.DepartmentName"></select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="Gender" class="form-control select-input" asp-items="ViewBag.Gender"></select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="SocialStatus" class="form-control select-input" asp-items="ViewBag.SocialStatus"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Country" class="form-control select-input" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="State" class="form-control select-input"  />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="City" class="form-control select-input"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Street" class="form-control select-input" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="PinCode" class="form-control select-input"  />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="BankName" class="form-control select-input"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="AccountName" class="form-control select-input" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="AccountNumber" class="form-control select-input" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="BranchName" class="form-control select-input"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="EmployeeTypeId" class="form-control select-input" asp-items="ViewBag.EmployeeTypeId"></select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="EmlpoyeeGradeId" class="form-control select-input" asp-items="ViewBag.EmlpoyeeGradeId"></select>
+                                  
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="DesignationId" class="form-control select-input" asp-items="ViewBag.DesignationId"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="ShiftId" class="form-control select-input" asp-items="ViewBag.ShiftId"></select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="JoinDate" class="form-control select-input" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="SuperEmlpoyeeId" class="form-control select-input" asp-items="ViewBag.SuperEmlpoyeeId"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="control-label select-input">PFNumber</label>
+                                    <input asp-for="PFNumber" class="form-control select-input" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="control-label select-input">Total Vacations Days</label>
+                                    <input asp-for="TotalVacations" class="form-control select-input" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="control-label select-input">Total Houres Leave</label>
+                                    <input asp-for="TotoleHouresToleave" class="form-control select-input" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="control-label select-input">Sick leave</label>
+                                    <input asp-for="Sickleave" class="form-control select-input" placeholder="Sick leaves" required />
+                                    <span asp-validation-for="Sickleave" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input asp-for="Name" class="form-control select-input" placeholder="Sick leaves" required hidden/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="EditUser" class="btn btn-primary" asp-route-id="@Model.Id">Back to List</a>
+        </div>
+    </div>
+}
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+}
+
+
+

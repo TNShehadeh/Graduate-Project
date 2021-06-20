@@ -1,0 +1,184 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@model HR.ViewModel.AddUserDetails
+@inject IAuthorizationService authorization;
+@{
+    ViewData["Title"] = "Add User";
+}
+@if ((await authorization.AuthorizeAsync(User, "AddUser")).Succeeded)
+{
+    <h2>
+        Add New User
+    </h2>
+    <div class="top container body-content">
+        <hr />
+        <div class="row">
+            <div class="col">
+                <form method="post"  enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Country" class="form-control select-input" placeholder="Country" required/>
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="State" class="form-control select-input" placeholder="State" required/>
+                                    <span asp-validation-for="State" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="City" class="form-control select-input" placeholder="City" required/>
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Street" class="form-control select-input" placeholder="Street" required/>
+                                    <span asp-validation-for="Street" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="PinCode" class="form-control select-input" placeholder="PinCode" required/>
+                                    <span asp-validation-for="PinCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="BankName" class="form-control select-input" placeholder="Bank Name" required/>
+                                    <span asp-validation-for="BankName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="AccountName" class="form-control select-input" placeholder="Account Name" required/>
+                                    <span asp-validation-for="AccountName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="AccountNumber" class="form-control select-input" placeholder="Account Number" required/>
+                                    <span asp-validation-for="AccountNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="BranchName" class="form-control select-input" placeholder="Branch Name" required/>
+                                    <span asp-validation-for="BranchName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="EmployeeTypeId" class="form-control select-input" asp-items="ViewBag.EmployeeTypeId" required></select>
+                                    <span asp-validation-for="EmployeeTypeId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="EmlpoyeeGradeId" class="form-control select-input" asp-items="ViewBag.EmlpoyeeGradeId" required></select>
+                                    <span asp-validation-for="EmlpoyeeGradeId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="DesignationId" class="form-control select-input" asp-items="ViewBag.DesignationId" required></select>
+                                    <span asp-validation-for="DesignationId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="ShiftId" class="form-control select-input" asp-items="ViewBag.ShiftId" required></select>
+                                    <span asp-validation-for="ShiftId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="JoinDate" class="form-control select-input" placeholder="Country" required/>
+                                    <span asp-validation-for="JoinDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <select asp-for="SuperEmlpoyeeId" class="form-control select-input" asp-items="ViewBag.SuperEmlpoyeeId" required></select>
+                                    <span asp-validation-for="SuperEmlpoyeeId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="PFNumber" class="form-control select-input" placeholder="PF Number" required/>
+                                    <span asp-validation-for="PFNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <input asp-for="TotalVacations" class="form-control select-input" placeholder="Total Vacations" required />
+                                <span asp-validation-for="TotalVacations" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Name" class="form-control select-input" placeholder="The Document Name" required/>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input asp-for="TheDocument" class="form-control custom-file-input select-input" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" required />
+                                        <label class="custom-file-label select-input">Choose File...</label>
+                                        <span asp-validation-for="TheDocument" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="TotoleHouresToleave" class="form-control select-input" placeholder="leaves Houres" required />
+                                    <span asp-validation-for="TotoleHouresToleave" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input asp-for="Sickleave" class="form-control select-input" placeholder="Sick leaves" required />
+                                    <span asp-validation-for="Sickleave" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default delete-link" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="UsersList" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+}
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+}
+
+
+

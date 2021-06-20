@@ -1,0 +1,197 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">First Name</label>
+                        <input asp-for="FirstName" class="form-control select-input" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Middle Name</label>
+                        <input asp-for="MiddleName" class="form-control select-input" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Father Name</label>
+                        <input asp-for="FatherName" class="form-control select-input" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">UserName</label>
+                        <input asp-for="Username" class="form-control select-input" disabled/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Gender</label>
+                        <input asp-for="Gender" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Social Status</label>
+                        <input asp-for="SocialStatus" class="form-control select-input" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Country</label>
+                        <input asp-for="Country" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">State</label>
+                        <input asp-for="State" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">City</label>
+                        <input asp-for="City" class="form-control select-input" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Street</label>
+                        <input asp-for="Street" class="form-control select-input" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label select-input">PinCode</label>
+                            <input asp-for="PinCode" class="form-control select-input" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Employee Grade</label>
+                        <input asp-for="DesignationId" class="form-control select-input" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Employee Grade</label>
+                        <input asp-for="EmlpoyeeGradeId" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Shift</label>
+                        <input asp-for="ShiftId" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Employee Type</label>
+                        <input asp-for="EmployeeTypeId" class="form-control select-input" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Department Name</label>
+                        <input asp-for="DepartmentName" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">SuperEmlpoyee</label>
+                        <input asp-for="SuperEmlpoyeeId" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Bank Name</label>
+                        <input asp-for="BankName" class="form-control select-input" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Branch Name</label>
+                        <input asp-for="BranchName" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Account Name</label>
+                        <input asp-for="AccountName" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Account Number</label>
+                        <input asp-for="AccountNumber" class="form-control select-input" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">PFNumber</label>
+                        <input asp-for="PFNumber" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Join Date</label>
+                        <input asp-for="JoinDate" class="form-control select-input" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Total Vacations Days</label>
+                        <input asp-for="TotalVacations" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Total Houres Leave</label>
+                        <input asp-for="TotoleHouresToleave" class="form-control select-input" disabled />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label select-input">Sick leaves</label>
+                        <input asp-for="Sickleave" class="form-control select-input" disabled />
+                    </div>
+                </div>
+            </div>
+            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

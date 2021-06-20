@@ -1,0 +1,177 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<Employee> signInManager;
+@inject Microsoft.AspNetCore.Identity.UserManager<Employee> userManager;
+@*@using HR.Hubs.noti;*@
+@{
+    int q = 0;
+    ViewBag.number = q;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HR</title>
+    <!-- Css  -->
+    <link href="~/lib/bootstrap/dist/css/Bootstrap4.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/W3School/w3s.css" rel="stylesheet" />
+    <link href="~/lib/Datatable/DataTable.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet" />
+    <link href="~/css/NavSidecss.css" rel="stylesheet" />
+    <link href="~/css/Table.css" rel="stylesheet" />
+    <link href="~/css/pdfmin.css" rel="stylesheet" media="screen and (min-height: 600px)" />
+    <link href="~/css/pdfmax.css" rel="stylesheet" media="screen and (max-height: 900px)" />
+
+</head>
+<body>
+    <!-- Nav&Side bar  -->
+    <header>
+        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("HR"))
+        {
+            <div class="all">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                    <div class="container">
+                        <span class="nav-w3-button" onclick="w3_open()"><i class="fas fa-ellipsis-h"></i></span>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex  justify-content-between" style="direction:rtl !important;">
+                            <partial name="_LoginPartial" />
+                        </div>
+                    </div>
+                </nav>
+                <div class="w3-sidebar w3-light-grey w3-bar-block text" id="Sidebar" style="width:10%">
+                    <div class="logo-container">
+                        <img src="~/Img/Logo/tariq-logo2.png" class="logo" />
+                        <span class="nav-w3-button" onclick="w3_close()"><i class="fas fa-ellipsis-h"></i></span>
+                    </div>
+                    <div class="sidenav-container">
+                        <a class="w3-bar-item w3-button" asp-area="" asp-controller="Calendereds" asp-action="CalenderedView">HR</a>
+                        <button class="w3-bar-item w3-button w3-button w3-block w3-left-align" onclick="AdministrationButton()">Administration</button>
+                        <div id="Administration" class="w3-bar-item w3-hide  ">
+                            <a asp-area="" asp-controller="Administration" asp-action="ListRoles" class="w3-bar-item w3-button">List Roles</a>
+                            <a asp-area="" asp-controller="Administration" asp-action="UsersList" class="w3-bar-item w3-button">Users List</a>
+                        </div>
+
+                        <button class="w3-bar-item w3-button w3-button w3-block w3-left-align" onclick="EmployeeInformationButton()">Employee Information</button>
+                        <div id="EmployeeInformation" class="w3-bar-item w3-hide  ">
+                            <a asp-area="" asp-controller="OfficialDetails" asp-action="Index" class="w3-bar-item w3-button">Official Details</a>
+                            <a asp-area="" asp-controller="Address" asp-action="Index" class="w3-bar-item w3-button">Address</a>
+                            <a asp-area="" asp-controller="Departments" asp-action="Index" class="w3-bar-item w3-button">Departments</a>
+                            <a asp-area="" asp-controller="Documents" asp-action="Index" class="w3-bar-item w3-button">Documents</a>
+                            <a asp-area="" asp-controller="BankInfoes" asp-action="Index" class="w3-bar-item w3-button">Bank Info</a>
+                        </div>
+
+                        <button class="w3-bar-item w3-button w3-button w3-block w3-left-align" onclick="StaticInformationButton()">Static Information</button>
+                        <div id="StaticInformation" class="w3-bar-item w3-hide  ">
+                            <a asp-area="" asp-controller="Shifts" asp-action="Index" class="w3-bar-item w3-button">Shifts</a>
+                            <a asp-area="" asp-controller="Genders" asp-action="Index" class="w3-bar-item w3-button">Genders</a>
+                            <a asp-area="" asp-controller="SocialStatus" asp-action="Index" class="w3-bar-item w3-button">Social Status</a>
+                            <a asp-area="" asp-controller="EmployeeTypes" asp-action="Index" class="w3-bar-item w3-button">Employee Types</a>
+                            <a asp-area="" asp-controller="EmlpoyeeGrades" asp-action="Index" class="w3-bar-item w3-button">Emlpoyee Grades</a>
+                            <a asp-area="" asp-controller="Designations" asp-action="Index" class="w3-bar-item w3-button">Designations</a>
+                            <a asp-area="" asp-controller="Status" asp-action="Index" class="w3-bar-item w3-button">Status</a>
+                            <a asp-area="" asp-controller="LeaveTypes" asp-action="Index" class="w3-bar-item w3-button">Leaves Type</a>
+                        </div>
+                        <a asp-area="" asp-controller="Calendereds" asp-action="Index" class="w3-bar-item w3-button">Calendered</a>
+                        <a asp-area="" asp-controller="LeaveApplications" asp-action="Index" class="w3-bar-item w3-button">Leave Applications</a>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (signInManager.IsSignedIn(User) && User.IsInRole("User"))
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <span class="nav-w3-button" onclick="w3_open()"><i class="fas fa-ellipsis-h"></i></span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </nav>
+            <div class="w3-sidebar w3-light-grey w3-bar-block text" id="Sidebar" style="width:10%">
+                <div class="logo-container">
+                    <img src="~/Img/Logo/tariq-logo2.png" class="logo" />
+                    <span class="nav-w3-button" onclick="w3_close()"><i class="fas fa-ellipsis-h"></i></span>
+                </div>
+                <div class="sidenav-container">
+                    <a asp-area="" asp-controller="Calendereds" asp-action="CalenderedView" class="w3-bar-item w3-button">Home</a>
+                    <a asp-area="" asp-controller="LeaveApplications" asp-action="Index" class="w3-bar-item w3-button">Leave Applications</a>
+                </div>
+            </div>
+        }
+
+    </header>
+    <!-- RenderBody      -->
+    <div class="container pb-5 container-new">
+        <main role="main" class="pb-5">
+            @RenderBody()
+        </main>
+        <div id="send" class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+            <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                    <img height="32" width="32" class="rounded mr-2" id="nimg">
+                    <strong class="mr-auto" id="Title"></strong>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <small id="time"></small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body" id="text">
+                    New leave application
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer  -->
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - HR - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <!-- script  -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/Datatable/DataTable.js"></script>
+    <script src="~/lib/sweetalert.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script>
+        var number = document.getElementById('NotiCount').value;
+        var x = '<span class="badge" id="NotiNumber">' + number + '</span>';
+
+        $('#NotiNumber').html(x);
+        var q = Number(number);
+        var con = new signalR.HubConnectionBuilder().withUrl("/nHub").build();
+        con.start();
+        con.on("ReciveApp", function (Text, Tiltle, Path, Time) {
+            q += 1;
+            document.getElementById('nimg').setAttribute('src', '/Files/EmployeePhotos/' + Path);
+            $("#text").html(Text);
+            $("#Title").html(Tiltle);
+            $("#time").html(Time);
+            $('#liveToast').toast('show');
+            var Notificationsound = new Audio('/Sounds/sharp-592.ogg');
+            Notificationsound.play();
+
+            var h = '<a class="dropdown-item">';
+            h += '<div class="row"> <div class="col-3">';
+            h += '<img style="width:100%; border-radius:50%" src="/Files/EmployeePhotos/' + Path + '" />';
+            h += '</div> <div class="col-9">  <strong>' + Tiltle + ' </strong></div> </div></a>';
+            $("#notiList").prepend(h);
+            var number = document.getElementById('NotiCount').value;
+            var x = '<span class="badge" id="NotiNumber">' + q + '</span>';
+            $('#NotiNumber').html(x);
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,167 @@
+﻿@using Microsoft.AspNetCore.Authorization;
+@model IEnumerable<HR.Models.LeaveApplication>;
+@inject IAuthorizationService authorization;
+@inject Microsoft.AspNetCore.Identity.SignInManager<Employee> signInManager;
+@inject Microsoft.AspNetCore.Identity.UserManager<Employee> userManager;
+@inject HR.Data.ApplicationDbContext context;
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+    <div class="col">
+        <a asp-action="DownloadAsExel" class="btn btn-primary">Download your data As Exel</a>
+        @if ((await authorization.AuthorizeAsync(User, "DownloadAllAsExel")).Succeeded)
+        {
+            <a asp-action="DownloadAllAsExel" class="btn btn-primary">Download for all</a>
+        }
+    </div>
+</div>
+<br />
+<table class="table" id="classes_table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.End)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (ViewBag.super == item.SuperEmployeeInfo || User.IsInRole("Admin") || userManager.GetUserId(User) == item.EmployeeInfo || User.IsInRole("HR"))
+            {
+                <tr>
+                    <td>
+                        @{
+                            var w = userManager.FindByIdAsync(item.EmployeeInfo).Result;
+                            var q = "";
+                            if (w == null)
+                            {
+                                q = "Deleted";
+                            }
+                            else
+                            {
+                                q = userManager.GetUserNameAsync(w).Result;
+                            }
+                        }
+                        @q
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeaveCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Start)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.End)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeaveType.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @if ((await authorization.AuthorizeAsync(User, "Edit&DeleteLeave")).Succeeded)
+                        {
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="dropdown-item">Edit</a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="dropdown-item">Details</a>
+                                    <a class="dropdown-item delete-link" data-id="@item.Id">Delete</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#classes_table').DataTable({
+                responsive: true,
+                "columnDefs": [
+                    { "searchable": false, "targets": 7 }
+                ]
+            });
+        });
+    </script>
+    <script>
+        $(document).on("click", ".delete-link", function () {
+            var clicked_btn = $(this);
+            var user_id = clicked_btn.attr("data-id");
+            Swal.fire({
+                title: 'Are you sure you want to delete this?',
+                text: "You won't be able to revert this again!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/LeaveApplications/Delete",
+                        data: { id: user_id }
+                    }).done(function () {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        ).then((result) => {
+                            location.reload();
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@model HR.ViewModel.AddUser
+@inject IAuthorizationService authorization;
+@{
+    ViewData["Title"] = "Add User";
+}
+@if ((await authorization.AuthorizeAsync(User, "AddUser")).Succeeded)
+{
+    <h2>
+        Add New User
+    </h2>
+    <div class="top container body-content">
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Bday" class="control-label"></label>
+                        <input asp-for="Bday" class="form-control" />
+                        <span asp-validation-for="Bday" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default delete-link" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="UsersList" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+}
+
